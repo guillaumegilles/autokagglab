@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kaggle-agent"
+version = "0.1.0"
+description = "Autonomous Kaggle research harness: validate, profile, and run deterministic baselines (offline, single-user CLI)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "typer>=0.12",
+    "pydantic>=2.5",
+    "pyyaml>=6.0",
+    "pandas>=2.1",
+    "pyarrow>=15.0",
+    "scikit-learn>=1.4",
+    "lightgbm>=4.3",
+    "catboost>=1.2",
+    "sqlalchemy>=2.0",
+    "mlflow>=2.10",
+    "structlog>=24.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.1",
+    "pytest-timeout>=2.2",
+    "jsonschema>=4.21",
+    "ruff>=0.3",
+    "mypy>=1.9",
+]
+
+[project.scripts]
+kaggle-agent = "kaggle_agent.cli.app:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["automlab"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+timeout = 600
+addopts = "-q"
+
+[tool.coverage.run]
+source = ["src/kaggle_agent"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 85
