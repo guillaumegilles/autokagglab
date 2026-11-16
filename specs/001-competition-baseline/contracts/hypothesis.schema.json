@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://autokagglab.dev/schemas/hypothesis.schema.json",
+  "title": "Hypothesis",
+  "description": "Explicit, falsifiable hypothesis attached to exactly one experiment (constitution I).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["statement", "expected_effect"],
+  "properties": {
+    "statement": { "type": "string", "minLength": 1 },
+    "rationale": { "type": "string" },
+    "expected_effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["metric", "direction", "minimum_change"],
+      "properties": {
+        "metric": { "type": "string", "minLength": 1 },
+        "direction": { "type": "string", "enum": ["increase", "decrease"] },
+        "minimum_change": { "type": "number", "minimum": 0, "default": 0.0 }
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://autokagglab.dev/schemas/experiment.schema.json",
+  "title": "ExperimentSpec",
+  "description": "Declarative experiment specification. The MVP executes only validated declarative specs; no unconstrained generated code (constitution VII).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["experiment_id", "run_id", "hypothesis", "change", "model_family", "params"],
+  "properties": {
+    "experiment_id": { "type": "string", "pattern": "^exp-[0-9]{4,}$" },
+    "run_id": { "type": "string", "format": "uuid" },
+    "parent_id": { "type": ["string", "null"], "pattern": "^exp-[0-9]{4,}$" },
+    "hypothesis": { "$ref": "hypothesis.schema.json" },
+    "change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "type": "string", "enum": ["baseline", "model_family", "model_params", "feature_strategy", "missing_value_strategy", "categorical_strategy"] },
+        "from": {},
+        "to": {}
+      },
+      "description": "Exactly one controlled change relative to the parent experiment."
+    },
+    "model_family": { "type": "string", "enum": ["lightgbm", "catboost"] },
+    "params": { "type": "object", "description": "Allowlisted model parameters only." },
+    "feature_set_version": { "type": "string", "default": "v0" },
+    "cv_strategy": { "type": "string", "enum": ["stratified-kfold", "kfold"] },
+    "seed": { "type": "integer", "default": 42 },
+    "status": { "type": "string", "enum": ["PROPOSED", "VALIDATED", "RUNNING", "COMPLETED", "FAILED", "TIMED_OUT", "REJECTED_DUPLICATE", "REJECTED_POLICY"] },
+    "git_commit": { "type": ["string", "null"] },
+    "experiment_fingerprint": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" }
+  }
+}

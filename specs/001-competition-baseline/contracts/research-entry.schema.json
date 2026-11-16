@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://autokagglab.dev/schemas/research-entry.schema.json",
+  "title": "ResearchLogEntry",
+  "description": "One append-only JSONL entry in research_log.jsonl. Entries are never rewritten; corrections are new entries linked via parent_entry_id (constitution VI).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["entry_id", "timestamp", "run_id", "type", "status"],
+  "properties": {
+    "entry_id": { "type": "string", "format": "uuid" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "run_id": { "type": "string", "format": "uuid" },
+    "experiment_id": { "type": ["string", "null"] },
+    "type": { "type": "string", "enum": ["run", "experiment"] },
+    "status": { "type": "string", "enum": ["COMPLETED", "FAILED", "TIMED_OUT", "REJECTED_DUPLICATE", "REJECTED_POLICY"] },
+    "hypothesis": { "$ref": "hypothesis.schema.json" },
+    "observed": { "type": ["object", "null"] },
+    "conclusion": { "type": ["string", "null"] },
+    "parent_entry_id": { "type": ["string", "null"], "format": "uuid" }
+  }
+}

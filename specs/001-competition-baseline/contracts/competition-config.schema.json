@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://autokagglab.dev/schemas/competition-config.schema.json",
+  "title": "CompetitionConfig",
+  "description": "Declarative configuration for one competition workspace (competition.yaml).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "task", "target", "id_columns", "metric", "cv", "seed", "budgets"],
+  "properties": {
+    "name": { "type": "string", "minLength": 1 },
+    "task": { "type": "string", "enum": ["binary-classification", "regression"] },
+    "target": { "type": "string", "minLength": 1 },
+    "id_columns": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "metric": {
+      "type": "string",
+      "enum": ["roc_auc", "log_loss", "rmse", "mae", "r2"],
+      "description": "roc_auc/log_loss require task=binary-classification; rmse/mae/r2 require task=regression."
+    },
+    "cv": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["strategy", "n_folds"],
+      "properties": {
+        "strategy": { "type": "string", "enum": ["stratified-kfold", "kfold"] },
+        "n_folds": { "type": "integer", "minimum": 2, "maximum": 10, "default": 5 }
+      }
+    },
+    "seed": { "type": "integer", "default": 42 },
+    "budgets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_experiments", "experiment_timeout_seconds", "run_timeout_seconds", "max_consecutive_failures"],
+      "properties": {
+        "max_experiments": { "type": "integer", "minimum": 1, "default": 10 },
+        "experiment_timeout_seconds": { "type": "integer", "minimum": 60, "default": 1200 },
+        "run_timeout_seconds": { "type": "integer", "minimum": 300, "default": 10800 },
+        "max_consecutive_failures": { "type": "integer", "minimum": 1, "default": 3 },
+        "min_improvement": { "type": "number", "default": 0.001 }
+      }
+    }
+  }
+}
