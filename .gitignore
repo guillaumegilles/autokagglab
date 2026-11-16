@@ -42,3 +42,12 @@ coverage/
 # Misc
 *.tmp
 *.bak
+
+# Python tooling caches
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# Harness runtime artifacts
+mlruns/
+competitions/
