@@ -1,15 +1,15 @@
 {
-  "version": "0.8.11",
+  "version": "1.0.6",
   "integration_state_schema": 1,
   "installed_integrations": [
-    "copilot"
+    "vibe"
   ],
   "integration_settings": {
-    "copilot": {
+    "vibe": {
       "script": "sh",
-      "invoke_separator": "."
+      "invoke_separator": "-"
     }
   },
-  "integration": "copilot",
-  "default_integration": "copilot"
+  "integration": "vibe",
+  "default_integration": "vibe"
 }
