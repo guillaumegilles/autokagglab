@@ -1,14 +1,26 @@
 project:
   type: website
+
+# ---- Site-wide document metadata (mirrors ~/www/_quarto.yml)
+citation: true
+google-scholar: true
+
+# ---- Website Project Configuration
 website:
   title: "AutoKagglab"
-  site-url: "https://guillaumegilles.github.io/autokagglab/"
+  llms-txt: true
   page-navigation: true
   search: true
+  site-url: "https://guillaumegilles.github.io/autokagglab/"
   navbar:
+    logo: assets/mark.png
+    title: false
     left:
-      - text: "Documentation"
+      - text: "Docs"
         href: index.md
+    tools:
+      - icon: github
+        href: https://github.com/guillaumegilles/autokagglab
   sidebar:
     contents:
       - 01-overview.md
@@ -17,6 +29,23 @@ website:
       - 04-automlab-lessons.md
       - 05-development-workflow.md
       - 06-roadmap.md
+  page-footer:
+    left: "Built with [Quarto](https://quarto.org) · Source on [<i class='bi bi-github'></i> GitHub](https://github.com/guillaumegilles/autokagglab)"
+    center: "This site respects your privacy — no cookies, no tracking."
+  # ---- Social Media
+  favicon: assets/favicon.png
+  twitter-card:
+    image: assets/og-image.jpg
+    card-style: summary_large_image
+  open-graph:
+    image: assets/og-image.jpg
+
+# ---- HTML Configuration
 format:
   html:
-    theme: custom.scss
+    title-block-banner: true
+    toc: true
+    toc-depth: 2
+    smooth-scroll: true
+    citations-hover: true
+    theme: assets/custom.scss
