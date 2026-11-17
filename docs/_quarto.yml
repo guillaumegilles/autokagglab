@@ -2,10 +2,21 @@ project:
   type: website
 website:
   title: "AutoKagglab"
+  site-url: "https://guillaumegilles.github.io/autokagglab/"
+  page-navigation: true
+  search: true
   navbar:
-    left: [docs/README.md]
-  sidebar:       # or: contents: auto — the 01..06 numbering gives the order
-    contents: auto
+    left:
+      - text: "Documentation"
+        href: index.md
+  sidebar:
+    contents:
+      - 01-overview.md
+      - 02-architecture.md
+      - 03-harness-usage.md
+      - 04-automlab-lessons.md
+      - 05-development-workflow.md
+      - 06-roadmap.md
 format:
   html:
     theme: custom.scss

@@ -108,4 +108,4 @@ test passes on two clean executions.
 - **Immutable at runtime:** evaluator, splitter, governance config, raw data.
   Agent-editable: the declarative solution surface only.
 - **Source research inputs:** `constitution-prompt.md`, `openai-research.md`,
-  `TODO.md`, `WORKFLOW.md`, `automlab/` (see [README.md](README.md#source-material)).
+  `TODO.md`, `WORKFLOW.md`, `automlab/` (see [index](index.md#source-material)).
